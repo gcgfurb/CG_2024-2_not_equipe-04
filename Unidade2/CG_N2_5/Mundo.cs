@@ -115,14 +115,11 @@ namespace gcgcg
         if (estadoTeclado.IsKeyDown(Keys.Escape))
             Close();
 
-        // Defina o delta de movimento
         double delta = 0.05;
 
-        // Variáveis para armazenar o movimento desejado
         double movimentoX = 0;
         double movimentoY = 0;
 
-        // Detecta as teclas pressionadas e define o movimento
         if (estadoTeclado.IsKeyDown(Keys.D)) // Direita
         {
             movimentoX += delta;
@@ -140,13 +137,11 @@ namespace gcgcg
             movimentoY -= delta;
         }
 
-        // Se houver movimento, tenta mover o círculo menor
         if (movimentoX != 0 || movimentoY != 0)
         {
             circuloMenor.Mover(movimentoX, movimentoY, circuloMaior);
         }
 
-        // ... (resto do código existente)
     }
 
     protected override void OnResize(ResizeEventArgs e)
