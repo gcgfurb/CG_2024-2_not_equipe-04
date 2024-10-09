@@ -5,7 +5,7 @@ namespace gcgcg
 {
   internal class SrPalito : Objeto
 {
-    private float angulo = 0.0f;   // Controla a rotação do Sr. Palito
+    private float angulo = 0.0f;  
 
     public SrPalito(Objeto _paiRef, ref char _rotulo) : this(_paiRef, ref _rotulo, new Ponto4D(-0.5, -0.5), new Ponto4D(0.5, 0.5))
     {
@@ -48,7 +48,6 @@ namespace gcgcg
 
     public void Girar(float angulo)
     {
-        // Acumula o ângulo de rotação
         this.angulo += angulo;
 
         for (int i = 0; i < PontosListaTamanho; i++)
