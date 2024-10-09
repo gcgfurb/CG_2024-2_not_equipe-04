@@ -7,12 +7,12 @@ namespace gcgcg
 {
     internal class Spline : Objeto
     {
-        private const int NumeroPontosPorSegmento = 100;  // Número de pontos para desenhar a spline
-        private List<Ponto4D> controlPoints;   // Lista de pontos de controle da spline
+        private const int NumeroPontosPorSegmento = 100; 
+        private List<Ponto4D> controlPoints;   
 
         public Spline(Objeto _paiRef, ref char _rotulo, List<Ponto4D> pontosControle) : base(_paiRef, ref _rotulo)
         {
-            PrimitivaTipo = PrimitiveType.LineStrip;  // Usamos LineStrip para desenhar a spline como linhas conectadas
+            PrimitivaTipo = PrimitiveType.LineStrip;
 
             controlPoints = pontosControle;
 
@@ -21,7 +21,6 @@ namespace gcgcg
             Atualizar();
         }
 
-        // Função para adicionar os pontos da spline calculada
         private void AdicionarPontosSpline()
         {
             if (controlPoints.Count < 4)
@@ -35,7 +34,6 @@ namespace gcgcg
             }
         }
 
-        // Adiciona os pontos calculados de um segmento Bezier
         private void AdicionarPontosBezierSegmento(List<Ponto4D> pontosControleSegmento)
         {
             for (int i = 0; i <= NumeroPontosPorSegmento; i++)
@@ -46,7 +44,6 @@ namespace gcgcg
             }
         }
 
-        // Função para calcular ponto na curva Bezier cúbica
         private Ponto4D CalcularBezierCubic(double t, List<Ponto4D> pontosControle)
         {
             double x = Math.Pow(1 - t, 3) * pontosControle[0].X +
@@ -62,7 +59,6 @@ namespace gcgcg
             return new Ponto4D(x, y);
         }
 
-        // Atualiza o objeto no SRU
         private void Atualizar()
         {
             base.ObjetoAtualizar();
