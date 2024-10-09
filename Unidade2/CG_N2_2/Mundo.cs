@@ -125,10 +125,8 @@ namespace gcgcg
 
       if (estadoTeclado.IsKeyPressed(Keys.Space))
       {
-          // Avançar para a próxima primitiva na lista
           indicePrimitivaAtual = (indicePrimitivaAtual + 1) % primitivas.Length;
 
-          // Atualizar a primitiva geométrica do objeto selecionado
           objetoSelecionado.PrimitivaTipo = primitivas[indicePrimitivaAtual];
           Console.WriteLine($"Primitiva atual: {primitivas[indicePrimitivaAtual]}");
       }
