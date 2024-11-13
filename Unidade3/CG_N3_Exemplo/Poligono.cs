@@ -133,44 +133,40 @@ namespace gcgcg
         SetMatriz(matrizObjeto);
     }
 
-    public void Escalar(double sx, double sy, double sz, Ponto4D pontoFixo)
+    public void Escalar(double sx, double sy, double sz)
     {
-        var matrizObjeto = GetMatriz();
+        Ponto4D centroBBox = Bbox().ObterCentro;
 
         Transformacao4D transParaOrigem = new Transformacao4D();
-        transParaOrigem.AtribuirTranslacao(-pontoFixo.X, -pontoFixo.Y, -pontoFixo.Z);
+        transParaOrigem.AtribuirTranslacao(-centroBBox.X, -centroBBox.Y, -centroBBox.Z);
 
         Transformacao4D escala = new Transformacao4D();
         escala.AtribuirEscala(sx, sy, sz);
 
         Transformacao4D transDeVolta = new Transformacao4D();
-        transDeVolta.AtribuirTranslacao(pontoFixo.X, pontoFixo.Y, pontoFixo.Z);
+        transDeVolta.AtribuirTranslacao(centroBBox.X, centroBBox.Y, centroBBox.Z);
 
-        matrizObjeto = matrizObjeto.MultiplicarMatriz(transParaOrigem);
-        matrizObjeto = matrizObjeto.MultiplicarMatriz(escala);
-        matrizObjeto = matrizObjeto.MultiplicarMatriz(transDeVolta);
-
+        var matrizObjeto = GetMatriz();
+        matrizObjeto = transDeVolta.MultiplicarMatriz(escala).MultiplicarMatriz(transParaOrigem).MultiplicarMatriz(matrizObjeto);
         SetMatriz(matrizObjeto);
     }
 
-    public void Rotacionar(double anguloEmGraus, Ponto4D pontoFixo)
+    public void Rotacionar(double anguloEmGraus)
     {
-        var matrizObjeto = GetMatriz();
+        Ponto4D centroBBox = Bbox().ObterCentro;
 
         Transformacao4D transParaOrigem = new Transformacao4D();
-        transParaOrigem.AtribuirTranslacao(-pontoFixo.X, -pontoFixo.Y, -pontoFixo.Z);
+        transParaOrigem.AtribuirTranslacao(-centroBBox.X, -centroBBox.Y, -centroBBox.Z);
 
         Transformacao4D rotacao = new Transformacao4D();
         double anguloEmRadianos = anguloEmGraus * Transformacao4D.DEG_TO_RAD;
         rotacao.AtribuirRotacaoZ(anguloEmRadianos);
 
         Transformacao4D transDeVolta = new Transformacao4D();
-        transDeVolta.AtribuirTranslacao(pontoFixo.X, pontoFixo.Y, pontoFixo.Z);
+        transDeVolta.AtribuirTranslacao(centroBBox.X, centroBBox.Y, centroBBox.Z);
 
-        matrizObjeto = matrizObjeto.MultiplicarMatriz(transParaOrigem);
-        matrizObjeto = matrizObjeto.MultiplicarMatriz(rotacao);
-        matrizObjeto = matrizObjeto.MultiplicarMatriz(transDeVolta);
-
+        var matrizObjeto = GetMatriz();
+        matrizObjeto = transDeVolta.MultiplicarMatriz(rotacao).MultiplicarMatriz(transParaOrigem).MultiplicarMatriz(matrizObjeto);
         SetMatriz(matrizObjeto);
     }
 

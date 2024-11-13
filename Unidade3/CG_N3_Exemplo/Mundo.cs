@@ -261,29 +261,22 @@ namespace gcgcg
       }
 
       
-      // Escala em relação ao centro da BBox
-      if (estadoTeclado.IsKeyDown(Keys.Home) && objetoSelecionado != null)
-      {
-          Ponto4D centroBBox = objetoSelecionado.Bbox().ObterCentro;
-          Console.WriteLine("Centro da BBox: " + centroBBox);
-          objetoSelecionado.Escalar(1.01, 1.01, 1.0, centroBBox);
-      }
-      if (estadoTeclado.IsKeyDown(Keys.End) && objetoSelecionado != null)
-      {
-          Ponto4D centroBBox = objetoSelecionado.Bbox().ObterCentro;
-          objetoSelecionado.Escalar(0.99, 0.99, 1.0, centroBBox);
-      }
-      
-      // Rotação em relação ao centro da BBox
       if (estadoTeclado.IsKeyDown(Keys.D3) && objetoSelecionado != null)
       {
-          Ponto4D centroBBox = objetoSelecionado.Bbox().ObterCentro;
-          objetoSelecionado.Rotacionar(1.0, centroBBox);
+          objetoSelecionado.Rotacionar(1.0);
       }
       if (estadoTeclado.IsKeyDown(Keys.D4) && objetoSelecionado != null)
       {
-          Ponto4D centroBBox = objetoSelecionado.Bbox().ObterCentro;
-          objetoSelecionado.Rotacionar(-1.0, centroBBox);
+          objetoSelecionado.Rotacionar(-1.0); 
+      }
+
+      if (estadoTeclado.IsKeyDown(Keys.Home) && objetoSelecionado != null)
+      {
+          objetoSelecionado.Escalar(1.01, 1.01, 1.0);
+      }
+      if (estadoTeclado.IsKeyDown(Keys.End) && objetoSelecionado != null)
+      {
+          objetoSelecionado.Escalar(0.99, 0.99, 1.0); 
       }
       
       #endregion
